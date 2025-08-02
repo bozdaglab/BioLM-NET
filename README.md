@@ -1,5 +1,5 @@
 # **BioLM-NET**  
-## An interpretable deep-learning model combining prior biological knowledge and contextual LLM gene embeddings on multi-omics data to predict disease.
+## BioLM-NET: An interpretable deep-learning model combining prior biological knowledge and contextual LLM gene embeddings on multi-omics data to predict disease.
 
 
 ## Overview
