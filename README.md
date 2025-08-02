@@ -5,7 +5,7 @@
 ## Overview
 Biologically informed deep neural networks which connect input features to hidden layers based on known gene–pathway relationships have become increasingly popular. However, existing approaches often omit key molecular interactions such as Protein–Protein Interactions (PPI) and Protein–DNA Interactions (PDI).
 
-**BioLM-NET** addresses these gaps by:
+Contribution of **BioLM-NET** :
 - Fusing single-cell or bulk gene expression data with DNA methylation profiles
 - Integrating PPI and PDI networks directly into the model architecture
 - Aggregating omics signals at the pathway level via an attention-based pathway layer
