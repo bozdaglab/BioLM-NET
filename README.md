@@ -27,5 +27,67 @@ Contribution of **BioLM-NET** :
    - Applies attention weights guided by LLM-derived gene embeddings  
 3. **Fusion & Prediction**  
    - Concatenates pathway-level representations  
-   - Passes through dense fusion layers to output disease-state probabilities  
+   - Passes through dense fusion layers to output disease-state probabilities
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## How to Run the Code
+
+1. **Load your five CSV files for the dataset you’re analyzing.**  
+   1. If you’re using **scTrioseq2**, for example:  
+      ```python
+      df_gene = pd.read_csv("Dataset/scTrioseq2/Gene_Expression.csv")
+      df_dna = pd.read_csv("Dataset/scTrioseq2/DNA_Methylation.csv")
+      true_label = pd.read_csv("Dataset/scTrioseq2/label.csv")
+      ge_target_to_kegg = pd.read_csv("Dataset/scTrioseq2/ge_target_to_KEGG_significant.csv")
+      dna_target_to_kegg = pd.read_csv("Dataset/scTrioseq2/dna_target_to_KEGG_significant.csv")
+      ```
+2. **Load PDI data:**  
+   ```python
+   df_pdi = pd.read_csv("Dataset/PDI/PDI.csv")
+   ```
+3. **Load PPI data:**  
+   ```python
+   df_ppi = pd.read_csv("Dataset/PPI/PPI.csv")
+   ```
+4. **Load your LLM embeddings into variable `FNAME`:**  
+   - **Single-cell data (scTrioseq2):** choose one of the following filenames:  
+     ```text
+     embedding_associations_age_cell_type_drugs_pathways_openai_large.parquet
+     embedding_associations_age_drugs_pathways_openai_large.parquet
+     embedding_associations_cell_type_openai_large.parquet
+     embedding_associations_cell_type_tissue_drug_pathway_openai_large.parquet
+     ```  
+     Then assign it, for example:  
+     ```python
+     FNAME = "embedding_associations_age_cell_type_drugs_pathways_openai_large.parquet"
+     ```
+   - **Bulk data (BRCA, COAD, GBM):** choose one of the following filenames:  
+     ```text
+     embedding_original_ada_text.parquet
+     embedding_original_large_3.parquet
+     ```  
+     Then assign it, for example:  
+     ```python
+     FNAME = "embedding_original_large_3.parquet"
+     ```
+5. **Formatting a new dataset:**  
+   1. **Gene expression / DNA methylation:**  
+      - Rows = samples, Columns = gene names  
+   2. **PDI:** two columns (`TF`, `Target`)  
+      ```csv
+      TF,Target
+      ```  
+   3. **PPI:** three columns (`protein1`, `protein2`, `combined_score`)  
+      ```csv
+      protein1,protein2,combined_score
+      ```  
+   4. **Pathways:** two columns (`SYMBOL`, `PathwayID`)  
+      ```csv
+      SYMBOL,PathwayID
+      ```
+
 
