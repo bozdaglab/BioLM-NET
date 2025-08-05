@@ -1,0 +1,9 @@
+numpy>=1.18.0
+pandas>=1.0.0
+scikit-learn>=0.22.0
+matplotlib>=3.1.0
+tensorflow>=2.4.0
+joblib>=0.14.0
+tqdm>=4.41.0
+tqdm-joblib>=0.0.10
+huggingface-hub>=0.4.0
