@@ -89,5 +89,3 @@ pip install -r requirements.txt
       ```csv
       SYMBOL,PathwayID
       ```
-
-
