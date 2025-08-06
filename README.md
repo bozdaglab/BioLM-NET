@@ -36,8 +36,8 @@ pip install -r requirements.txt
 
 ## How to Run the Code
 
-1. **Load your five CSV files for the dataset you’re analyzing.**  
-   1. If you’re using **scTrioseq2**, for example:  
+1. **The five CSV files for the chosen dataset must be loaded.**  
+   1. For **scTrioseq2**, for example:  
       ```python
       df_gene = pd.read_csv("Dataset/scTrioseq2/Gene_Expression.csv")
       df_dna = pd.read_csv("Dataset/scTrioseq2/DNA_Methylation.csv")
@@ -45,47 +45,60 @@ pip install -r requirements.txt
       ge_target_to_kegg = pd.read_csv("Dataset/scTrioseq2/ge_target_to_KEGG_significant.csv")
       dna_target_to_kegg = pd.read_csv("Dataset/scTrioseq2/dna_target_to_KEGG_significant.csv")
       ```
-2. **Load PDI data:**  
+2. **PDI data should be loaded:**  
    ```python
    df_pdi = pd.read_csv("Dataset/PDI/PDI.csv")
    ```
-3. **Load PPI data:**  
+3. **PPI data should be loaded:**  
    ```python
    df_ppi = pd.read_csv("Dataset/PPI/PPI.csv")
    ```
-4. **Load your LLM embeddings into variable `FNAME`:**  
-   - **Single-cell data (scTrioseq2):** choose one of the following filenames:  
+4. **LLM embeddings should be loaded into the variable `FNAME`:**  
+   - **Single-cell data (scTrioseq2):** one of the following filenames is to be selected from [GenePT Composable Embeddings](https://huggingface.co/honicky/genept-composable-embeddings):  
      ```text
      embedding_associations_age_cell_type_drugs_pathways_openai_large.parquet
      embedding_associations_age_drugs_pathways_openai_large.parquet
      embedding_associations_cell_type_openai_large.parquet
      embedding_associations_cell_type_tissue_drug_pathway_openai_large.parquet
      ```  
-     Then assign it, for example:  
+     Then assigned, for example:  
      ```python
      FNAME = "embedding_associations_age_cell_type_drugs_pathways_openai_large.parquet"
      ```
-   - **Bulk data (BRCA, COAD, GBM):** choose one of the following filenames:  
+   - **Bulk data (BRCA, COAD, GBM):** one of the following filenames is to be selected:  
      ```text
      embedding_original_ada_text.parquet
      embedding_original_large_3.parquet
      ```  
-     Then assign it, for example:  
+     Then assigned, for example:  
      ```python
      FNAME = "embedding_original_large_3.parquet"
      ```
-5. **Formatting a new dataset:**  
+5. **A new dataset must be formatted as follows:**  
    1. **Gene expression / DNA methylation:**  
-      - Rows = samples, Columns = gene names  
-   2. **PDI:** two columns (`TF`, `Target`)  
+      - Samples are represented by rows, and gene names by columns.  
+   2. **PDI:** two columns (`TF`, `Target`) are required:  
       ```csv
       TF,Target
       ```  
-   3. **PPI:** three columns (`protein1`, `protein2`, `combined_score`)  
+   3. **PPI:** three columns (`protein1`, `protein2`, `combined_score`) are required:  
       ```csv
       protein1,protein2,combined_score
       ```  
-   4. **Pathways:** two columns (`SYMBOL`, `PathwayID`)  
+   4. **Pathways:** two columns (`SYMBOL`, `PathwayID`) are required:  
       ```csv
       SYMBOL,PathwayID
-      ```
+      ```  
+
+## Notebooks
+
+- **BioLMNET.ipynb**  
+  This notebook contains the core implementation of the BioLM‑NET model. This notebook:  
+  1. Loads and preprocesses multi-omics datasets (gene expression, DNA methylation, PDI, PPI, and pathway data).  
+  2. Builds the BioLM‑NET architecture with attention-based pathway layers and LLM derived gene embeddings.  
+  3. Trains the model, evaluates performance (accuracy, F1, precision, recall) 
+
+- **BioLMNET_Weighted_Loss.ipynb**  
+  A variant of the main notebook that demonstrates how to incorporate a weighted loss function to address class imbalance. It includes:  
+  1. Calculation of class weights based on label distribution.  
+  2. Modifications to the training loop to apply the weighted loss. 
