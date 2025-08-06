@@ -36,8 +36,8 @@ pip install -r requirements.txt
 
 ## How to Run the Code
 
-1. **The five CSV files for the chosen dataset must be loaded.**  
-   1. For **scTrioseq2**, for example:  
+1. **Load the CSV files for your selected dataset (BRCA, COAD, GBM, or scTrioseq2).**  
+   - For **scTrioseq2** dataset:  
       ```python
       df_gene = pd.read_csv("Dataset/scTrioseq2/Gene_Expression.csv")
       df_dna = pd.read_csv("Dataset/scTrioseq2/DNA_Methylation.csv")
@@ -45,38 +45,38 @@ pip install -r requirements.txt
       ge_target_to_kegg = pd.read_csv("Dataset/scTrioseq2/ge_target_to_KEGG_significant.csv")
       dna_target_to_kegg = pd.read_csv("Dataset/scTrioseq2/dna_target_to_KEGG_significant.csv")
       ```
-2. **PDI data should be loaded:**  
+2. **Load PDI data:**  
    ```python
    df_pdi = pd.read_csv("Dataset/PDI/PDI.csv")
    ```
-3. **PPI data should be loaded:**  
+3. **Load PPI data:**  
    ```python
    df_ppi = pd.read_csv("Dataset/PPI/PPI.csv")
    ```
-4. **LLM embeddings should be loaded into the variable `FNAME`:**  
-   - **Single-cell data (scTrioseq2):** one of the following filenames is to be selected from [GenePT Composable Embeddings](https://huggingface.co/honicky/genept-composable-embeddings):  
+4. **Load LLM embeddings in the variable `FNAME`:**  
+   - **Single-cell data (scTrioseq2):** select  one of the filenames from [GenePT Composable Embeddings](https://huggingface.co/honicky/genept-composable-embeddings):  
      ```text
      embedding_associations_age_cell_type_drugs_pathways_openai_large.parquet
      embedding_associations_age_drugs_pathways_openai_large.parquet
      embedding_associations_cell_type_openai_large.parquet
      embedding_associations_cell_type_tissue_drug_pathway_openai_large.parquet
      ```  
-     Then assigned, for example:  
+     Then assign. For example:  
      ```python
      FNAME = "embedding_associations_age_cell_type_drugs_pathways_openai_large.parquet"
      ```
-   - **Bulk data (BRCA, COAD, GBM):** one of the following filenames is to be selected:  
+   - **Bulk data (BRCA, COAD, GBM):** select one of the filenames:  
      ```text
      embedding_original_ada_text.parquet
      embedding_original_large_3.parquet
      ```  
-     Then assigned, for example:  
+     Then assign. For example:  
      ```python
      FNAME = "embedding_original_large_3.parquet"
      ```
-5. **A new dataset must be formatted as follows:**  
+5. **Formatting for new datasets:**  
    1. **Gene expression / DNA methylation:**  
-      - Samples are represented by rows, and gene names by columns.  
+      - Samples are represented by rows, and features (gene names) by columns.  
    2. **PDI:** two columns (`TF`, `Target`) are required:  
       ```csv
       TF,Target
